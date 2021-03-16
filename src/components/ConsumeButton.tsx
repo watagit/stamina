@@ -1,10 +1,10 @@
-import React from "react";
+import React, { FC } from "react";
 
 type Props = {
   handleClick: () => void;
 };
 
-const ConsumeButton: React.FC<Props> = ({ handleClick }) => {
+const ConsumeButton: FC<Props> = ({ handleClick }) => {
   return <button onClick={handleClick}>消費する</button>;
 };
 

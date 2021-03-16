@@ -2,12 +2,13 @@ import { NextPage } from "next";
 import React, { ReactNode, FC, useState } from "react";
 import Countdown from "react-countdown";
 import ConsumeButton from "../components/ConsumeButton";
+import Stamina from "../components/Stamina";
 
 const initialStamina: ReactNode[] = [
-  <div>a</div>,
-  <div>a</div>,
-  <div>a</div>,
-  <div>a</div>
+  <Stamina />,
+  <Stamina />,
+  <Stamina />,
+  <Stamina />,
 ];
 
 type StaminaType = {
@@ -25,7 +26,7 @@ const Index: NextPage<FC> = () => {
 
   const increaseStamina = () => {
     if (staminas.length < 5) {
-      setStaminas((staminas: StaminaType[]) => [...staminas, <div>a</div>]);
+      setStaminas((staminas: StaminaType[]) => [...staminas, <Stamina />]);
     }
   }
 
