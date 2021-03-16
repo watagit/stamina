@@ -1,8 +1,10 @@
 import { NextPage } from "next";
 import React, { ReactNode, FC, useState } from "react";
 import Countdown from "react-countdown";
+
 import ConsumeButton from "../components/ConsumeButton";
 import Stamina from "../components/Stamina";
+import StaminaBar from "../components/StaminaBar";
 
 const initialStamina: ReactNode[] = [
   <Stamina />,
@@ -46,11 +48,7 @@ const Index: NextPage<FC> = () => {
 
   return (
     <>
-      <div>
-        {staminas.map((stamina: StaminaType, index: number) => (
-          <div key={index}>{stamina}</div>
-        ))}
-      </div>
+      <StaminaBar staminas={staminas} />
       <div>
         <Countdown
           date={count}
