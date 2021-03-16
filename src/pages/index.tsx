@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import React, { ReactNode, FC, useState } from "react";
 import Countdown from "react-countdown";
-import ConsumeButton from "../component/ConsumeButton";
+import ConsumeButton from "../components/ConsumeButton";
 
 const initialStamina: ReactNode[] = [
   <div>a</div>,
