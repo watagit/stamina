@@ -1,22 +1,22 @@
 import { NextPage } from "next";
-import React, { FC, useState } from "react";
+import React, { ReactNode, FC, useState } from "react";
 import Countdown from "react-countdown";
+import ConsumeButton from "../component/ConsumeButton";
 
-const initialStamina = [
-  { id: 1, component: <div>a</div> },
-  { id: 2, component: <div>a</div> },
-  { id: 3, component: <div>a</div> },
-  { id: 4, component: <div>a</div> },
+const initialStamina: ReactNode[] = [
+  <div>a</div>,
+  <div>a</div>,
+  <div>a</div>,
+  <div>a</div>
 ];
 
 type StaminaType = {
-  id: number;
   component: Element;
 };
 
 const Index: NextPage<FC> = () => {
   const [count, setCount] = useState<number>(Date.now() + 5000)
-  const [staminas, setStaminas] = useState<any>(initialStamina);
+  const [staminas, setStaminas] = useState<ReactNode[]>(initialStamina);
 
   const resetCount = () => {
     setCount(Date.now() + 5000);
@@ -25,7 +25,13 @@ const Index: NextPage<FC> = () => {
 
   const increaseStamina = () => {
     if (staminas.length < 5) {
-      setStaminas((staminas: any) => [...staminas, { id: 5, component: <div>a</div> }]);
+      setStaminas((staminas: StaminaType[]) => [...staminas, <div>a</div>]);
+    }
+  }
+
+  const decreaseStamina = () => {
+    if (staminas.length > 0) {
+      setStaminas((staminas: StaminaType[]) => [...staminas].slice(0, staminas.length-1));
     }
   }
 
@@ -40,8 +46,8 @@ const Index: NextPage<FC> = () => {
   return (
     <>
       <div>
-        {staminas.map((stamina: StaminaType) => (
-          <div key={stamina.id}>{stamina.component}</div>
+        {staminas.map((stamina: StaminaType, index: number) => (
+          <div key={index}>{stamina}</div>
         ))}
       </div>
       <div>
@@ -52,6 +58,7 @@ const Index: NextPage<FC> = () => {
           renderer={renderer}
         />
       </div>
+      <ConsumeButton handleClick={decreaseStamina} />
     </>
   );
 };
