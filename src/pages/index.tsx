@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import React, { ReactNode, FC, useState } from "react";
-import Countdown from "react-countdown";
+import Countdown, { zeroPad } from "react-countdown";
 
 import ConsumeButton from "../components/ConsumeButton";
 import UnusedStamina from "../components/UnusedStamina";
@@ -15,12 +15,8 @@ const initialStamina: ReactNode[] = [
   <UnusedStamina />
 ];
 
-type StaminaType = {
-  component: Element;
-};
-
 const Index: NextPage<FC> = () => {
-  const [count, setCount] = useState<number>(Date.now() + 5000)
+  const [count, setCount] = useState<number>(Date.now() + 10000)
   const [staminas, setStaminas] = useState<ReactNode[]>(initialStamina);
   const [unusedStaminaCount, setUnusedStaminaCount] = useState<number>(5);
 
@@ -51,14 +47,16 @@ const Index: NextPage<FC> = () => {
     if (completed) {
       return null;
     } else {
-      return <span>{hours}:{minutes}:{seconds}</span>;
+      return <span>{zeroPad(hours)}:{zeroPad(minutes)}:{zeroPad(seconds)}</span>;
     }
   }
 
   return (
-    <>
-      <StaminaBar staminas={staminas} />
-      <div>
+    <div className={"sm:max-w-full"}>
+      <div className={"my-10"}>
+        <StaminaBar staminas={staminas} />
+      </div>
+      <div className={"flex justify-center my-10 lg:text-6xl text-3xl"}>
         <Countdown
           date={count}
           onComplete={resetCount}
@@ -66,8 +64,10 @@ const Index: NextPage<FC> = () => {
           renderer={renderer}
         />
       </div>
-      <ConsumeButton handleClick={decreaseStamina} />
-    </>
+      <div>
+        <ConsumeButton handleClick={decreaseStamina} />
+      </div>
+    </div>
   );
 };
 
